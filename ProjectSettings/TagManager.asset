@@ -8,6 +8,15 @@ TagManager:
   - Medicine
   - Fire
   - Bomb
+  - B2
+  - Cement
+  - E46
+  - E61
+  - Excavator
+  - Police
+  - Tractor1
+  - Tractor5
+  - Bus
   layers:
   - Default
   - TransparentFX

@@ -68,6 +68,42 @@ public class DropPlaceScript : MonoBehaviour, IDropHandler
                         case "Fire":
                             objScript.effects.PlayOneShot(objScript.audioCli[4]);
                             break;
+
+                        case "B2":
+                            objScript.effects.PlayOneShot(objScript.audioCli[7]);
+                            break;
+
+                        case "Cement":
+                            objScript.effects.PlayOneShot(objScript.audioCli[8]);
+                            break;
+
+                        case "E46":
+                            objScript.effects.PlayOneShot(objScript.audioCli[9]);
+                            break;
+
+                        case "E61":
+                            objScript.effects.PlayOneShot(objScript.audioCli[10]);
+                            break;
+
+                        case "Excavator":
+                            objScript.effects.PlayOneShot(objScript.audioCli[11]);
+                            break;
+
+                        case "Police":
+                            objScript.effects.PlayOneShot(objScript.audioCli[12]);
+                            break;
+
+                        case "Tractor1":
+                            objScript.effects.PlayOneShot(objScript.audioCli[13]);
+                            break;
+
+                        case "Tractor2":
+                            objScript.effects.PlayOneShot(objScript.audioCli[14]);
+                            break;
+
+                        case "Bus":
+                            objScript.effects.PlayOneShot(objScript.audioCli[15]);
+                            break;
                        
                         default:
                             Debug.Log("Unknown tag detected");
@@ -96,6 +132,56 @@ public class DropPlaceScript : MonoBehaviour, IDropHandler
                         objScript.vehicles[2].GetComponent<RectTransform>().localPosition =
                            objScript.startCoordinates[2];
                         break;
+
+
+
+                        case "B2":
+                        objScript.vehicles[3].GetComponent<RectTransform>().localPosition = 
+                            objScript.startCoordinates[3];
+                            break;
+
+                        case "Cement":
+                        objScript.vehicles[4].GetComponent<RectTransform>().localPosition = 
+                            objScript.startCoordinates[4];
+                            break;
+
+                        case "E46":
+                        objScript.vehicles[5].GetComponent<RectTransform>().localPosition = 
+                            objScript.startCoordinates[5];
+                            break;
+
+                        case "E61":
+                        objScript.vehicles[6].GetComponent<RectTransform>().localPosition = 
+                            objScript.startCoordinates[6];
+                            break;
+
+                        case "Excavator":
+                        objScript.vehicles[7].GetComponent<RectTransform>().localPosition = 
+                            objScript.startCoordinates[7];
+                            break;
+
+                        case "Police":
+                        objScript.vehicles[8].GetComponent<RectTransform>().localPosition = 
+                            objScript.startCoordinates[8];
+                            break;
+
+                        case "Tractor1":
+                        objScript.vehicles[9].GetComponent<RectTransform>().localPosition = 
+                            objScript.startCoordinates[9];
+                            break;
+
+                        case "Tractor2":
+                        objScript.vehicles[10].GetComponent<RectTransform>().localPosition = 
+                            objScript.startCoordinates[10];
+                            break;
+
+                        case "Bus":
+                        objScript.vehicles[11].GetComponent<RectTransform>().localPosition = 
+                            objScript.startCoordinates[11];
+                            break;
+
+
+
 
                     default:
                         Debug.Log("Unknown tag detected");
