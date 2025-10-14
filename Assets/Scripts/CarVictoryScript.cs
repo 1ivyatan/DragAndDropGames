@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,11 @@ public class CarVictoryScript : MonoBehaviour
 
     public GameObject hangar;
     public GameObject gameEnd;
+    public static TickerScript ticker;
+
+
+
+    public TickerScript tickerScr;
 
 
     public GameObject counterTextObject;
@@ -39,6 +45,15 @@ public class CarVictoryScript : MonoBehaviour
             gameEndHud.transform.Find("EndText").GetComponent<Text>().text = "Neuzvarēji!\n" + counter + " / " + realMax + " (" + max + ")" + "\n" + hangarHud.transform.Find("TimeText").GetComponent<Text>().text;
         } else {
             gameEndHud.transform.Find("EndText").GetComponent<Text>().text = "Uzvarēji!\n" + counter + " / " + realMax + "\n" + hangarHud.transform.Find("TimeText").GetComponent<Text>().text;
+
+    //            gameEndHud.transform.Find("StarsText")
+            if (ticker.getTime().TotalSeconds <= 150) {
+                gameEndHud.transform.Find("StarsText").GetComponent<Text>().text = "★★★";
+            } else if (ticker.getTime().TotalSeconds <= 300) {
+                gameEndHud.transform.Find("StarsText").GetComponent<Text>().text = "★★";
+            } else {
+                gameEndHud.transform.Find("StarsText").GetComponent<Text>().text = "★";
+            }
         }
 
 
@@ -79,6 +94,7 @@ public class CarVictoryScript : MonoBehaviour
 
         hangarHud = hangar;
         gameEndHud = gameEnd;
+        ticker = tickerScr;
 
 
         counterText.text = "0 / " + realMax;

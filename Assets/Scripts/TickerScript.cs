@@ -7,10 +7,9 @@ public class TickerScript : MonoBehaviour
     public GameObject TickerText;
 
     private Text tickerTextString;
-    private float timeTicked = 0;
+    public float timeTicked = 0;
 
     public static bool mustTick = true;
-
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -31,5 +30,9 @@ public class TickerScript : MonoBehaviour
 
         tickerTextString.text = time.ToString(@"hh\:mm\:ss");
         
+    }
+
+    public TimeSpan getTime() {
+        return TimeSpan.FromSeconds((int)timeTicked);
     }
 }

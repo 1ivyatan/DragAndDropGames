@@ -1657,6 +1657,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hangar: {fileID: 1564227202}
   gameEnd: {fileID: 1149950329}
+  tickerScript: {fileID: 1310376416}
   counterTextObject: {fileID: 1478345838}
   carContainer: {fileID: 1426755931}
 --- !u!114 &1310376416
@@ -1672,6 +1673,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TickerText: {fileID: 2032425154}
+  timeTicked: 0
 --- !u!114 &1310376417
 MonoBehaviour:
   m_ObjectHideFlags: 0
