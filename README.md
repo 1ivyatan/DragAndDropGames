@@ -1,7 +1,17 @@
 # DragAndDropGames
 _Unity 2D Drag And Drop games for children +6_
 
-**To do list:**
+# Description
+Assortment of drag and drop games implemented in Unity engine.
+
+# Previews
+
+<img width="1100" height="606" alt="menu" src="https://github.com/user-attachments/assets/7d5673c8-b705-4e80-ae64-0731d0bd0d93" />
+
+<img width="1091" height="608" alt="cars" src="https://github.com/user-attachments/assets/92116e55-9b09-4cde-b2ea-4f74dde9a1f7" />
+
+
+# **To do list:**
 - [x] Create the necessary folders 
 - [x] Add necessary assets 
 - [x] Add cars on the map
