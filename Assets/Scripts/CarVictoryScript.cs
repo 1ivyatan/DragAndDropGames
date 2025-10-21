@@ -14,6 +14,11 @@ public class CarVictoryScript : MonoBehaviour
 
 
 
+    public FlyingObjectSpawnScript flyingObjectSpawnScript;
+    public static FlyingObjectSpawnScript flierSpawner;
+
+
+
     public TickerScript tickerScr;
 
 
@@ -40,9 +45,15 @@ public class CarVictoryScript : MonoBehaviour
         if (counter != realMax) return;
 
         TickerScript.mustTick = false;
+        flierSpawner.isActivated = false;
+
+        while (flierSpawner.spawnPoint.childCount > 0) {
+            DestroyImmediate(flierSpawner.spawnPoint.GetChild(0).gameObject);
+        }
 
         if (lostCar) {
-            gameEndHud.transform.Find("EndText").GetComponent<Text>().text = "Neuzvarēji!\n" + counter + " / " + realMax + " (" + max + ")" + "\n" + hangarHud.transform.Find("TimeText").GetComponent<Text>().text;
+            gameEndHud.transform.Find("EndText").GetComponent<Text>().text = "Neuzvarēji!\n" + counter + " / " + realMax + " (" + max + ")" + "\n" + hangarHud.transform.Find("TimeText").GetComponent<Text>().text;                                    
+            gameEndHud.transform.Find("StarsText").GetComponent<Text>().text = "";
         } else {
             gameEndHud.transform.Find("EndText").GetComponent<Text>().text = "Uzvarēji!\n" + counter + " / " + realMax + "\n" + hangarHud.transform.Find("TimeText").GetComponent<Text>().text;
 
@@ -95,6 +106,7 @@ public class CarVictoryScript : MonoBehaviour
         hangarHud = hangar;
         gameEndHud = gameEnd;
         ticker = tickerScr;
+        flierSpawner = flyingObjectSpawnScript;
 
 
         counterText.text = "0 / " + realMax;

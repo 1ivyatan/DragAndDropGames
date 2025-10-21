@@ -15,6 +15,8 @@ public class FlyingObjectSpawnScript : MonoBehaviour
     public float objectMinSpeed = 2f;
     public float objectMaxSpeed = 200f;
 
+    public bool isActivated = true;
+
 
 
     void Start()
@@ -22,13 +24,16 @@ public class FlyingObjectSpawnScript : MonoBehaviour
         screenBoundriesScript = FindFirstObjectByType<ScreenBoundriesScript>();
         minY = screenBoundriesScript.minY;
         maxY = screenBoundriesScript.maxY;
+    
+        isActivated = true;
+
         InvokeRepeating(nameof(SpawnCloud), 0f, cloudSpawnInterval);
         InvokeRepeating(nameof(SpawnObject), 0f, objectSpawnInterval);
     }
 
     void SpawnCloud()
     {
-        if(cludsPrefabs.Length == 0) 
+        if(cludsPrefabs.Length == 0 || !isActivated) 
             return;
 
         GameObject cloudPrefab = cludsPrefabs[Random.Range(0, cludsPrefabs.Length)];
@@ -45,7 +50,7 @@ public class FlyingObjectSpawnScript : MonoBehaviour
 
     void SpawnObject()
     {
-        if (objectPrefabs.Length == 0)
+        if (objectPrefabs.Length == 0|| !isActivated)
             return;
 
         GameObject objectPrefab = objectPrefabs[Random.Range(0, objectPrefabs.Length)];
