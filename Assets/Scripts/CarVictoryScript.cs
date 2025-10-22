@@ -58,9 +58,9 @@ public class CarVictoryScript : MonoBehaviour
             gameEndHud.transform.Find("EndText").GetComponent<Text>().text = "Uzvarēji!\n" + counter + " / " + realMax + "\n" + hangarHud.transform.Find("TimeText").GetComponent<Text>().text;
 
     //            gameEndHud.transform.Find("StarsText")
-            if (ticker.getTime().TotalSeconds <= 150) {
+            if (ticker.getTime().TotalSeconds <= 250) {
                 gameEndHud.transform.Find("StarsText").GetComponent<Text>().text = "★★★";
-            } else if (ticker.getTime().TotalSeconds <= 300) {
+            } else if (ticker.getTime().TotalSeconds <= 360) {
                 gameEndHud.transform.Find("StarsText").GetComponent<Text>().text = "★★";
             } else {
                 gameEndHud.transform.Find("StarsText").GetComponent<Text>().text = "★";
