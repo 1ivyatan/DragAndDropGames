@@ -36,8 +36,8 @@ public class DropPlaceScript : MonoBehaviour, IDropHandler
                 Debug.Log("X size difference: " + xSizeDiff);
                 Debug.Log("Y size difference: " + ySizeDiff);
 
-                if((rotDiff <= 5 || (rotDiff >= 355 && rotDiff <= 360)) &&
-                    (xSizeDiff <= 0.05 && ySizeDiff <= 0.05)) {
+                if((rotDiff <= 10 || (rotDiff >= 350 && rotDiff <= 360)) &&
+                    (xSizeDiff <= 0.1 && ySizeDiff <= 0.1)) {
 
 
                     CarVictoryScript.increment();

@@ -7,13 +7,13 @@ public class TransformationScript : MonoBehaviour
       if(ObjectScript.lastDragged != null) {
             if(Input.GetKey(KeyCode.Z)) {
                 ObjectScript.lastDragged.GetComponent<RectTransform>().transform.Rotate(
-                    0, 0, Time.deltaTime * 15f);
+                    0, 0, Time.deltaTime * 30f);
             }
 
             if (Input.GetKey(KeyCode.X))
             {
                 ObjectScript.lastDragged.GetComponent<RectTransform>().transform.Rotate(
-                    0, 0, -Time.deltaTime * 15f);
+                    0, 0, -Time.deltaTime * 30f);
             }
 
             if (Input.GetKey(KeyCode.UpArrow))
