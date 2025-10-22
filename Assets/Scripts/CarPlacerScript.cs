@@ -26,7 +26,13 @@ public class CarPlacerScript : MonoBehaviour
         }
 
         for (int i = 0; i < shuffledSpots.Length; i++) {
+
+
+            float randScale = ((float)rnd.NextDouble() * (2f - 1.5f)) + 1f;
+
             objectScript.vehicles[i].transform.position = new Vector3(shuffledSpots[i].transform.position.x, shuffledSpots[i].transform.position.y, shuffledSpots[i].transform.position.z);
+            objectScript.vehicles[i].transform.localScale = new Vector3( randScale, randScale, 1f);
+            objectScript.vehicles[i].transform.Rotate(0, 0, (float)rnd.NextDouble() * 180f );
 //            Debug.Log(shuffledSpots[i]);
         }
     }
