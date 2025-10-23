@@ -11,13 +11,21 @@ public class DropPlaceScript : MonoBehaviour, IDropHandler
 
     private CarVictoryScript carVictoryScript;
 
+    void Start()
+    {
+        if (objScript == null)
+        {
+            objScript = Object.FindFirstObjectByType<ObjectScript>();
+        }
+    }
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void OnDrop(PointerEventData eventData)
     {
-        if((eventData.pointerDrag != null) && 
-            Input.GetMouseButtonUp(0) && !Input.GetMouseButton(1) && !Input.GetMouseButton(2))
-        {
+        if (eventData.pointerDrag != null)
+            return; 
+
             if(eventData.pointerDrag.tag.Equals(tag))
             {
                placeZRot = 
@@ -33,6 +41,7 @@ public class DropPlaceScript : MonoBehaviour, IDropHandler
                 vehicleSiz = GetComponent<RectTransform>().localScale;
                 xSizeDiff = Mathf.Abs(placeSiz.x - vehicleSiz.x);
                 ySizeDiff = Mathf.Abs(placeSiz.y - vehicleSiz.y);
+
                 Debug.Log("X size difference: " + xSizeDiff);
                 Debug.Log("Y size difference: " + ySizeDiff);
 
@@ -188,6 +197,6 @@ public class DropPlaceScript : MonoBehaviour, IDropHandler
                         break;
                 }
             }
-        }
+        
     }
 }

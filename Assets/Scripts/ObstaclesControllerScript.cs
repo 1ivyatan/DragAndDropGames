@@ -65,9 +65,17 @@ public class ObstaclesControllerScript : MonoBehaviour
         }
 
         // Ja neko nevelk un kursors pieskaras bumbai
+        Vector2 inputPosition;
+        if (!TryGetInputPosition(out inputPosition))
+        {
+            return;
+        }
+
+       //////////////////
+
         if(CompareTag("Bomb") && !isExploding && 
             RectTransformUtility.RectangleContainsScreenPoint(
-                rectTransform, Input.mousePosition, Camera.main))
+                rectTransform, inputPosition, Camera.main))
         {
             Debug.Log("Bomb hit by cursor (without dragging)");
             TriggerExplosion();
@@ -76,7 +84,7 @@ public class ObstaclesControllerScript : MonoBehaviour
 
         if(ObjectScript.drag && !isFadingOut && 
             RectTransformUtility.RectangleContainsScreenPoint(
-                rectTransform, Input.mousePosition, Camera.main))
+                rectTransform, inputPosition, Camera.main))
         {
             Debug.Log("Obstacle hit by drag");
            if(ObjectScript.lastDragged != null)
@@ -92,6 +100,25 @@ public class ObstaclesControllerScript : MonoBehaviour
             else
                 StartToDestroy(Color.cyan);
         }
+    }
+
+    bool TryGetInputPosition(out Vector2 position)
+    {
+        #if UNITY_EDITOR || UNITY_STANDALONE
+            position = Input.mousePosition;
+            return true;
+        #elif UNITY_ANDROID
+            if (Input.touchCount > 0) {
+                position = Input.GetTouch(0).position;
+                return true;
+            } else {
+                position = Vector2.zero;
+                return false;
+            }
+        #else
+            position = Vector2.zero;
+            return false;
+        #endif
     }
 
     public void TriggerExplosion()
@@ -217,6 +244,11 @@ public class ObstaclesControllerScript : MonoBehaviour
 
     IEnumerator Vibrate()
     {
+        #if UNITY_ANDROID
+            Handheld.Vibrate();
+        #endif
+
+
         Vector2 orginalPosition = rectTransform.anchoredPosition;
         float duration = 0.3f;
         float elpased = 0f;
