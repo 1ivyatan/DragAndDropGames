@@ -1,16 +1,16 @@
 using UnityEngine;
 
+// CHANGES FOR ANDROID
 public class ScreenBoundriesScript : MonoBehaviour
 {
     [HideInInspector]
     public Vector3 screenPoint, offset;
     [HideInInspector]
     public float minX, maxX, minY, maxY;
-
+   
     public Rect worldBounds = new Rect(-960, -540, 1920, 1080);
-
-    [Range(0f, .5f)]
-    public float padding = .02f;
+    [Range(0f, 0.5f)]
+    public float padding = 0.02f;
 
     public Camera targetCamera;
 
@@ -23,34 +23,18 @@ public class ScreenBoundriesScript : MonoBehaviour
     float lastAspect;
     Vector3 lastCamPos;
 
-
-    void Awake()
-    {
-        if (targetCamera == null)
+    void Awake() {
+        if(targetCamera == null)
         {
             targetCamera = Camera.main;
         }
 
         RecalculateBounds();
-
-
-        /*
-        Vector3 lowerLeft = Camera.main.ScreenToWorldPoint(Vector3.zero);
-        Vector3 upperRight = 
-            Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 0));
-
-        float widthReduction = (upperRight.x - lowerLeft.x) * padding;
-        float heightReduction = (upperRight.y - lowerLeft.y) * padding;
-
-        minX = lowerLeft.x + widthReduction;
-        maxX = upperRight.x - widthReduction;
-        minY = lowerLeft.y + heightReduction;
-        maxY = upperRight.y - heightReduction;*/
     }
 
     void Update()
     {
-        if (targetCamera == null)
+        if(targetCamera == null)
         {
             return;
         }
@@ -60,39 +44,18 @@ public class ScreenBoundriesScript : MonoBehaviour
         if (targetCamera.orthographic)
         {
             if (!Mathf.Approximately(targetCamera.orthographicSize, lastOrthoSize))
-            {
                 changed = true;
-            }
         }
 
         if (!Mathf.Approximately(targetCamera.aspect, lastAspect))
-        {
             changed = true;
-        }
 
         if (targetCamera.transform.position != lastCamPos)
             changed = true;
 
-        if (changed)
-        {
+        if (changed) {
             RecalculateBounds();
         }
-    }
-
-    public Vector2 GetClampedPosition(Vector3 curPosition)
-    {
-        float shrinkW = worldBounds.width * padding;
-        float shrinkH = worldBounds.height * padding;
-
-        float wbMinX = worldBounds.xMin + shrinkW;
-        float wbMaxX = worldBounds.xMax - shrinkW;
-        float wbMinY = worldBounds.yMin + shrinkH;
-        float wbMaxY = worldBounds.yMax - shrinkH;
-
-        float cx = Mathf.Clamp(curPosition.x, wbMinX, wbMaxX);
-        float cy = Mathf.Clamp(curPosition.y, wbMinY, wbMaxY);
-
-        return new Vector2(cx, cy);
     }
 
     public void RecalculateBounds()
@@ -105,28 +68,24 @@ public class ScreenBoundriesScript : MonoBehaviour
         float wbMinY = worldBounds.yMin;
         float wbMaxY = worldBounds.yMax;
 
-        if (targetCamera.orthographic)
+        if(targetCamera.orthographic)
         {
             float halfH = targetCamera.orthographicSize;
             float halfW = halfH * targetCamera.aspect;
 
-
-            if ( halfW * 2f >= (wbMaxX - wbMinX))
-            {
-                minCamX = maxCamX = (wbMinX + wbMaxX) * .5f;
-            } 
-            else
-            {
+            if(halfW * 2f >= (wbMaxX - wbMinX)) {
+               minCamX = maxCamX = (wbMinX + wbMaxX) * 0.5f;
+            
+            } else {
                 minCamX = wbMinX + halfW;
                 maxCamX = wbMaxX - halfW;
             }
 
 
-            if (halfH * 2f >= (wbMaxY - wbMinX))
-            {
-                minCamY = maxCamY = (wbMinY + wbMaxY) * .5f;
-            } else
-            {
+            if(halfH * 2f >= (wbMaxY - wbMinY)) {
+               minCamY = maxCamY = (wbMinY + wbMaxY) * 0.5f;
+            
+            } else {
                 minCamY = wbMinY + halfH;
                 maxCamY = wbMaxY - halfH;
             }
@@ -137,14 +96,25 @@ public class ScreenBoundriesScript : MonoBehaviour
         lastCamPos = targetCamera.transform.position;
     }
 
-    public Vector3 GetClampedCameraPosition(Vector3 desiredCamCenter)
+    // For draggable objects
+    public Vector2 GetClampedPosition(Vector3 curPosition)
     {
-        float cx = Mathf.Clamp(desiredCamCenter.x, minCamX, maxCamX);
-        float cy = Mathf.Clamp(desiredCamCenter.y, minCamY, maxCamY);
+        float shrinkW = worldBounds.width * padding;
+        float shrinkH = worldBounds.height * padding;
+        float wbMinX = worldBounds.xMin + shrinkW;
+        float wbMaxX = worldBounds.xMax - shrinkW;
+        float wbMinY = worldBounds.yMin + shrinkH;
+        float wbMaxY = worldBounds.yMax - shrinkH;  
 
-        return new Vector3(cx, cy, desiredCamCenter.z);
+        float cx = Mathf.Clamp(curPosition.x, wbMinX, wbMaxX);
+        float cy = Mathf.Clamp(curPosition.y, wbMinY, wbMaxY);
+        return new Vector2(cx, cy);
     }
 
-    ////////////////////// HAS PROBLEMS
+    // For camera movement
+    public Vector3 GetClampedCameraPosition(Vector3 desiredCamCenter) {
+        float cx = Mathf.Clamp(desiredCamCenter.x, minCamX, maxCamX);
+        float cy = Mathf.Clamp(desiredCamCenter.y, minCamY, maxCamY);
+        return new Vector3(cx, cy, desiredCamCenter.z);
+    }
 }
-
