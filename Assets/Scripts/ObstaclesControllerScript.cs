@@ -21,19 +21,13 @@ public class ObstaclesControllerScript : MonoBehaviour
     private Image image;
     private Color orginalColor;
 
+
     void Start()
     {
-        canvasGroup = GetComponent<CanvasGroup>();
-        if (canvasGroup == null)
-        {
-            canvasGroup = gameObject.AddComponent<CanvasGroup>();
-        }
-
         rectTransform = GetComponent<RectTransform>();
 
         image = GetComponent<Image>();
         orginalColor = image.color;
-
         objectScript = Object.FindFirstObjectByType<ObjectScript>();
         
         carVictoryScript = Object.FindFirstObjectByType<CarVictoryScript>();
@@ -41,6 +35,15 @@ public class ObstaclesControllerScript : MonoBehaviour
         //        Debug.Log(carVictoryScript.lostCar);
 
         screenBoundriesScript = Object.FindFirstObjectByType<ScreenBoundriesScript>();
+
+
+        canvasGroup = GetComponent<CanvasGroup>();
+        if (canvasGroup == null)
+        {
+            canvasGroup = gameObject.AddComponent<CanvasGroup>();
+        }
+
+
         StartCoroutine(FadeIn());
     }
 
@@ -67,34 +70,31 @@ public class ObstaclesControllerScript : MonoBehaviour
         // Ja neko nevelk un kursors pieskaras bumbai
         Vector2 inputPosition;
         if (!TryGetInputPosition(out inputPosition))
-        {
             return;
-        }
 
-       //////////////////
 
-        if(CompareTag("Bomb") && !isExploding && 
+        if (CompareTag("Bomb") && !isExploding &&
             RectTransformUtility.RectangleContainsScreenPoint(
                 rectTransform, inputPosition, Camera.main))
         {
             Debug.Log("Bomb hit by cursor (without dragging)");
             TriggerExplosion();
-        } 
+        }
 
 
-        if(ObjectScript.drag && !isFadingOut && 
+        if (ObjectScript.drag && !isFadingOut &&
             RectTransformUtility.RectangleContainsScreenPoint(
                 rectTransform, inputPosition, Camera.main))
         {
             Debug.Log("Obstacle hit by drag");
-           if(ObjectScript.lastDragged != null)
+            if (ObjectScript.lastDragged != null)
             {
                 StartCoroutine(ShrinkAndDestroy(ObjectScript.lastDragged, 0.5f));
                 ObjectScript.lastDragged = null;
                 ObjectScript.drag = false;
             }
 
-           if(CompareTag("Bomb"))
+            if (CompareTag("Bomb"))
                 StartToDestroy(Color.red);
 
             else
@@ -104,21 +104,22 @@ public class ObstaclesControllerScript : MonoBehaviour
 
     bool TryGetInputPosition(out Vector2 position)
     {
-        #if UNITY_EDITOR || UNITY_STANDALONE
-            position = Input.mousePosition;
-            return true;
-        #elif UNITY_ANDROID
-            if (Input.touchCount > 0) {
+#if UNITY_EDITOR || UNITY_STANDALONE
+        position = Input.mousePosition;
+        return true;
+
+#elif UNITY_ANDROID
+            if(Input.touchCount > 0)
+            {
                 position = Input.GetTouch(0).position;
                 return true;
-            } else {
+            }
+            else
+            {
                 position = Vector2.zero;
                 return false;
             }
-        #else
-            position = Vector2.zero;
-            return false;
-        #endif
+#endif
     }
 
     public void TriggerExplosion()

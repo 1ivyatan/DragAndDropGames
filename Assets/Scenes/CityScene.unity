@@ -1008,10 +1008,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fa10ed57fe36b1488376f43118af822, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxZoom: 300
+  maxZoom: 530
   minZoom: 150
-  panSpeed: 6
+  puncZoomSpeed: 0.9
+  mouseZoomSpeed: 150
+  mouseFollowSpeed: 0.1
+  touchPanSpeed: 1
+  screenBoundries: {fileID: 0}
   cam: {fileID: 519420031}
+  doubleTapMaxDelay: 0.3
+  doubleTapMaxDistance: 100
 --- !u!1 &536782976
 GameObject:
   m_ObjectHideFlags: 0
@@ -2380,7 +2386,14 @@ MonoBehaviour:
   maxX: 0
   minY: 0
   maxY: 0
+  worldBounds:
+    serializedVersion: 2
+    x: -960
+    y: -540
+    width: 1920
+    height: 1080
   padding: 0.02
+  targetCamera: {fileID: 519420031}
 --- !u!114 &1310376413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2393,6 +2406,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10ab475e5f01ecf4dabc7f1be1a56073, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationSpeed: 90
+  scaleSpeed: 0.5
 --- !u!114 &1310376414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2921,7 +2936,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
