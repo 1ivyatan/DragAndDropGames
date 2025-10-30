@@ -51,7 +51,8 @@ public class DragAndDropScript : MonoBehaviour, IPointerDownHandler, IBeginDragH
     }
 
     // CHANGES FOR ANDROID
-    public void OnBeginDrag(PointerEventData eventData) {
+    public void OnBeginDrag(PointerEventData eventData)
+    {
         ObjectScript.drag = true;
         ObjectScript.lastDragged = eventData.pointerDrag;
         canvasGro.blocksRaycasts = false;
@@ -63,14 +64,19 @@ public class DragAndDropScript : MonoBehaviour, IPointerDownHandler, IBeginDragH
 
         Vector3 pointerWorld;
 
-        if (ScreenPointToWorld(eventData.position, out pointerWorld)) {
+        if (ScreenPointToWorld(eventData.position, out pointerWorld))
+        {
             dragOffsetWorld = transform.position - pointerWorld;
 
-        } else {
+        }
+        else
+        {
             dragOffsetWorld = Vector3.zero;
         }
 
-           ObjectScript.lastDragged = eventData.pointerDrag;
+
+        ObjectScript.lastDragged = eventData.pointerDrag;
+
     }
 
 

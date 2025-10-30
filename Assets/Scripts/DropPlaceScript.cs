@@ -23,8 +23,9 @@ public class DropPlaceScript : MonoBehaviour, IDropHandler
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void OnDrop(PointerEventData eventData)
     {
-        if (eventData.pointerDrag != null)
-            return; 
+        if (eventData.pointerDrag == null)
+            return;
+
 
             if(eventData.pointerDrag.tag.Equals(tag))
             {
