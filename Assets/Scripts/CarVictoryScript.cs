@@ -7,20 +7,14 @@ public class CarVictoryScript : MonoBehaviour
     public static GameObject hangarHud;
     public static GameObject gameEndHud;
 
-
     public GameObject hangar;
     public GameObject gameEnd;
     public static TickerScript ticker;
 
-
-
     public FlyingObjectSpawnScript flyingObjectSpawnScript;
     public static FlyingObjectSpawnScript flierSpawner;
 
-
-
     public TickerScript tickerScr;
-
 
     public GameObject counterTextObject;
 
@@ -39,6 +33,9 @@ public class CarVictoryScript : MonoBehaviour
 
     public GameObject carContainer;
 
+    public CameraScript cameraScript;
+    public static CameraScript cameraScr;
+
     private static void checkVictory() {
         counterText.text = counter + " / " + realMax;
 
@@ -51,13 +48,17 @@ public class CarVictoryScript : MonoBehaviour
             DestroyImmediate(flierSpawner.spawnPoint.GetChild(0).gameObject);
         }
 
+        //cameraScr.cam.GetComponent<Canvas>().gameObject.SetActive(false);
+
+
+        cameraScr.cam.transform.Find("Canvas").GetComponent<Canvas>().gameObject.SetActive(false);
+
         if (lostCar) {
             gameEndHud.transform.Find("EndText").GetComponent<Text>().text = "Neuzvarēji!\n" + counter + " / " + realMax + " (" + max + ")" + "\n" + hangarHud.transform.Find("TimeText").GetComponent<Text>().text;                                    
             gameEndHud.transform.Find("StarsText").GetComponent<Text>().text = "";
         } else {
             gameEndHud.transform.Find("EndText").GetComponent<Text>().text = "Uzvarēji!\n" + counter + " / " + realMax + "\n" + hangarHud.transform.Find("TimeText").GetComponent<Text>().text;
 
-    //            gameEndHud.transform.Find("StarsText")
             if (ticker.getTime().TotalSeconds <= 250) {
                 gameEndHud.transform.Find("StarsText").GetComponent<Text>().text = "★★★";
             } else if (ticker.getTime().TotalSeconds <= 360) {
@@ -108,6 +109,7 @@ public class CarVictoryScript : MonoBehaviour
         ticker = tickerScr;
         flierSpawner = flyingObjectSpawnScript;
 
+        cameraScr = cameraScript;
 
         counterText.text = "0 / " + realMax;
     }

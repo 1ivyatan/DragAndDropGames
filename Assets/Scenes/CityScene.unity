@@ -3161,6 +3161,7 @@ MonoBehaviour:
   tickerScr: {fileID: 1310376416}
   counterTextObject: {fileID: 1478345838}
   carContainer: {fileID: 1426755931}
+  cameraScript: {fileID: 519420033}
 --- !u!114 &1310376416
 MonoBehaviour:
   m_ObjectHideFlags: 0

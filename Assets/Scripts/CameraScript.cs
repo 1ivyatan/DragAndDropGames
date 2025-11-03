@@ -38,6 +38,8 @@ public class CameraScript : MonoBehaviour
         screenBoundries.RecalculateBounds();
         transform.position = screenBoundries.GetClampedCameraPosition(transform.position);
 
+        //cam.GetComponent<Canvas>().gameObject.SetActive(true);
+
     }
 
     // Update is called once per frame
