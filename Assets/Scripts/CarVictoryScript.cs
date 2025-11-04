@@ -48,16 +48,21 @@ public class CarVictoryScript : MonoBehaviour
             DestroyImmediate(flierSpawner.spawnPoint.GetChild(0).gameObject);
         }
 
+        CameraScript.isActive = false;
+
         //cameraScr.cam.GetComponent<Canvas>().gameObject.SetActive(false);
 
 
-        cameraScr.cam.transform.Find("Canvas").GetComponent<Canvas>().gameObject.SetActive(false);
+        //cameraScr.cam.transform.Find("Canvas").GetComponent<Canvas>().gameObject.SetActive(false);
+
+        Transform floatingHangarHud = hangarHud.transform.Find("HangarMenu");
+
 
         if (lostCar) {
-            gameEndHud.transform.Find("EndText").GetComponent<Text>().text = "Neuzvarēji!\n" + counter + " / " + realMax + " (" + max + ")" + "\n" + hangarHud.transform.Find("TimeText").GetComponent<Text>().text;                                    
+            gameEndHud.transform.Find("EndText").GetComponent<Text>().text = "Neuzvarēji!\n" + counter + " / " + realMax + " (" + max + ")" + "\n" + floatingHangarHud.transform.Find("TimeText").GetComponent<Text>().text;                                    
             gameEndHud.transform.Find("StarsText").GetComponent<Text>().text = "";
         } else {
-            gameEndHud.transform.Find("EndText").GetComponent<Text>().text = "Uzvarēji!\n" + counter + " / " + realMax + "\n" + hangarHud.transform.Find("TimeText").GetComponent<Text>().text;
+            gameEndHud.transform.Find("EndText").GetComponent<Text>().text = "Uzvarēji!\n" + counter + " / " + realMax + "\n" + floatingHangarHud.transform.Find("TimeText").GetComponent<Text>().text;
 
             if (ticker.getTime().TotalSeconds <= 250) {
                 gameEndHud.transform.Find("StarsText").GetComponent<Text>().text = "★★★";
@@ -67,7 +72,7 @@ public class CarVictoryScript : MonoBehaviour
                 gameEndHud.transform.Find("StarsText").GetComponent<Text>().text = "★";
             }
         }
-
+        
 
         hangarHud.SetActive(false);    
         gameEndHud.SetActive(true);    

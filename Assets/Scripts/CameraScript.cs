@@ -22,13 +22,15 @@ public class CameraScript : MonoBehaviour
     public float doubleTapMaxDelay = .3f;
     public float doubleTapMaxDistance = 100f;
 
+    public static bool isActive;
+
     private void Awake()
     {
         if (!cam) cam = GetComponent<Camera>();
 
         if (!screenBoundries) screenBoundries = FindFirstObjectByType<ScreenBoundriesScript>();
 
-
+        isActive = true;
 
     }
 
@@ -45,7 +47,7 @@ public class CameraScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (TransformationScript.isTransforming) return;
+        if (TransformationScript.isTransforming || !isActive) return;
 
 #if UNITY_EDITOR || UNITY_STANDALONE
         DesktopFollowCursor();

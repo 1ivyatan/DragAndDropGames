@@ -11,12 +11,15 @@ public class TickerScript : MonoBehaviour
 
     public static bool mustTick = true;
 
+    public static string pubTimeText = "";
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         tickerTextString = TickerText.GetComponent<Text>();
         timeTicked = 0;
         mustTick = true;
+        pubTimeText = "";
     }
 
     // Update is called once per frame
@@ -28,8 +31,8 @@ public class TickerScript : MonoBehaviour
 
         TimeSpan time = TimeSpan.FromSeconds((int)timeTicked);
 
-        tickerTextString.text = time.ToString(@"hh\:mm\:ss");
-        
+        tickerTextString.text = pubTimeText = time.ToString(@"hh\:mm\:ss");
+
     }
 
     public TimeSpan getTime() {
