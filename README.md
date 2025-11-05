@@ -33,3 +33,7 @@ Placeholder for another level
 - [ ] Create game timer (HH:MM:SS)
 - [ ] Add animated clouds, vehicles, people, animals etc.
 - [x] Add flying obstacles with destroy effects
+- [ ] Fix camera zooming
+- [ ] Add interstitial ad
+- [ ] Add rewarded ad
+- [ ] Add banner ad
