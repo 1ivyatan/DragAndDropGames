@@ -2,14 +2,17 @@ using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 // andr
 public class CameraScript : MonoBehaviour
 {
-    public float maxZoom = 530f,
+    public float 
         minZoom = 150f, puncZoomSpeed = .9f, mouseZoomSpeed = 150f, mouseFollowSpeed = .1f, touchPanSpeed = 1f;
+
+    private float maxZoom = 530f;
 
     public ScreenBoundriesScript screenBoundries;
     public Camera cam;
@@ -65,6 +68,8 @@ public class CameraScript : MonoBehaviour
         {
             HandlePinch();
         }
+
+        UpdateMaxZoom();
 
         cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, minZoom, maxZoom);
         screenBoundries.RecalculateBounds();
@@ -169,6 +174,8 @@ public class CameraScript : MonoBehaviour
         float elapsed = 0f;
         float initialZoom = cam.orthographicSize;
 
+        float targetZoom = maxZoom;
+
         while (elapsed < duration)
         {
             // soon slowmotion 
@@ -184,5 +191,17 @@ public class CameraScript : MonoBehaviour
         cam.orthographicSize = startZoom;
         screenBoundries.RecalculateBounds();
         transform.position = screenBoundries.GetClampedCameraPosition(transform.position);
+    }
+
+    void UpdateMaxZoom()
+    {
+        if (!screenBoundries || !cam) return;
+
+        Rect wb = screenBoundries.worldBounds;
+
+        float maxZoomHeight = wb.height / 2f;
+        float maxZoomWidth = (wb.width / 2f) / cam.aspect;
+
+        maxZoom = Mathf.Min(maxZoomHeight, maxZoomWidth);
     }
 }
