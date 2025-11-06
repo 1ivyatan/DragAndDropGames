@@ -22,8 +22,8 @@ public class FlyingObjectSpawnScript : MonoBehaviour
     void Start()
     {
         screenBoundriesScript = FindFirstObjectByType<ScreenBoundriesScript>();
-        minY = screenBoundriesScript.minY;
-        maxY = screenBoundriesScript.maxY;
+        minY = screenBoundriesScript.worldBounds.yMin;
+        maxY = screenBoundriesScript.worldBounds.yMax;
     
         isActivated = true;
 
