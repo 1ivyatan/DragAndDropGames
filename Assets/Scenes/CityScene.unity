@@ -266,7 +266,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _androidAdUnitId: Interstitial_Android
   isReady: 0
-  _interstitialAdButton: {fileID: 585638324}
+  showOnStart: 1
+  _interstitialAdButton: {fileID: 0}
 --- !u!114 &186203456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -279,8 +280,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5e0491ea72e6ec459954209afff63f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  adsInitializer: {fileID: 186203457}
-  interstitialAd: {fileID: 186203455}
+  adsInitializer: {fileID: 0}
+  interstitialAd: {fileID: 0}
   turnOffInterstitialAd: 0
 --- !u!114 &186203457
 MonoBehaviour:
