@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Advertisements;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class InterstitialAd : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
@@ -106,7 +107,11 @@ public class InterstitialAd : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsSho
         {
             Debug.Log("Interstitial ad watched completely!");
             
-            //StartCoroutine(SlowDownTimeTemporarily(30f));
+            // temp
+            //if (SceneManager.GetActiveScene().name == "CityScene")
+            //{
+            //    StartCoroutine(CarPowerupScript.SlowDownTimeTemporarily(30f)); 
+            //}
             
             LoadAd();
 
@@ -118,16 +123,6 @@ public class InterstitialAd : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsSho
         }
     }
 
-    private IEnumerator SlowDownTimeTemporarily(float seconds)
-    {
-        Time.timeScale = 0.4f;
-        Debug.Log("Time slowed down to 0.4x for " + seconds + " sec");
-        yield return new WaitForSeconds(seconds);
-
-        Time.timeScale = 1.0f;
-        Debug.Log("Time restored to normal!");
-
-    }
 
     public void OnUnityAdsShowFailure(string placementId, UnityAdsShowError error, string message)
     {
