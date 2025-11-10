@@ -17,6 +17,8 @@ TagManager:
   - Tractor1
   - Tractor5
   - Bus
+  - 'InterstitialAdButton]'
+  - InterstitialAdButton
   layers:
   - Default
   - TransparentFX
