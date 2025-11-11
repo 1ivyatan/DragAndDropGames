@@ -328,7 +328,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _androidAdUnitId: Rewarded_Android
   _rewardedAdButton: {fileID: 585638324}
-  flyingObjectManager: {fileID: 0}
+  flyingObjectManager: {fileID: 1310376418}
 --- !u!1 &232763805
 GameObject:
   m_ObjectHideFlags: 0
@@ -3570,6 +3570,7 @@ GameObject:
   - component: {fileID: 1310376415}
   - component: {fileID: 1310376416}
   - component: {fileID: 1310376417}
+  - component: {fileID: 1310376418}
   m_Layer: 0
   m_Name: ScripHolder
   m_TagString: Untagged
@@ -3752,6 +3753,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 108f7c7d67bc60ad4ab75ccfbf0c0bd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1310376418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310376409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5613edef80b01744ea86324bececafe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1339233060
