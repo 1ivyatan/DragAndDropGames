@@ -9,6 +9,9 @@ public class AdManager : MonoBehaviour
     [SerializeField] bool turnOffInterstitialAd = false;
     private bool firstAdShown = false;
 
+    public RewardedAds rewardedAds;
+    [SerializeField] bool turnOffRewardedAds = false;
+
     // .......
 
     public static AdManager Instance { get; private set; }
@@ -39,6 +42,11 @@ public class AdManager : MonoBehaviour
             interstitialAd.OnInterstitialAdReady += HandleInterstitialReady;
             interstitialAd.LoadAd();
         }
+
+        if (!turnOffRewardedAds)
+        {
+            rewardedAds.LoadAd();
+        }
     }
 
     private void HandleInterstitialReady()
@@ -46,12 +54,7 @@ public class AdManager : MonoBehaviour
         if (!firstAdShown)
         {
             Debug.Log("Showing first time interstitial ad automatically!");
-
-            if (SceneManager.GetActiveScene().name != "MenuScene")
-            {
-                interstitialAd.ShowAd();
-            }
-            
+            interstitialAd.ShowAd();
             firstAdShown = true;
 
         }
@@ -77,18 +80,24 @@ public class AdManager : MonoBehaviour
         if (interstitialAd == null)
             interstitialAd = FindFirstObjectByType<InterstitialAd>();
 
-        Button interstitialButton = null;
-        GameObject interstitalGameObj = GameObject.FindGameObjectWithTag("InterstitialAdButton");
-
-        if (interstitalGameObj)
-        {
-            interstitialButton = interstitalGameObj.GetComponent<Button>();
-        }
+        Button interstitialButton =
+            GameObject.FindGameObjectWithTag("InterstitialButton").GetComponent<Button>();
 
         if (interstitialAd != null && interstitialButton != null)
         {
             interstitialAd.SetButton(interstitialButton);
         }
+
+
+        if (rewardedAds == null)
+            rewardedAds = FindFirstObjectByType<RewardedAds>();
+
+        Button rewardedAdButton =
+            GameObject.FindGameObjectWithTag("RewardedButton").GetComponent<Button>();
+
+        if (rewardedAds != null && rewardedAdButton != null)
+            rewardedAds.SetButton(rewardedAdButton);
+
 
         if (!firstSceneLoad)
         {
@@ -99,5 +108,6 @@ public class AdManager : MonoBehaviour
 
         Debug.Log("Scene loaded!");
         HandleAdsInitialized();
+
     }
 }

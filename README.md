@@ -34,6 +34,6 @@ Placeholder for another level
 - [x] Add animated clouds, vehicles, people, animals etc.
 - [x] Add flying obstacles with destroy effects
 - [x] Fix camera zooming
-- [ ] Add interstitial ad
+- [x] Add interstitial ad
 - [ ] Add rewarded ad
 - [ ] Add banner ad

@@ -19,6 +19,8 @@ TagManager:
   - Bus
   - 'InterstitialAdButton]'
   - InterstitialAdButton
+  - RewardedButton
+  - InterstitialButton
   layers:
   - Default
   - TransparentFX
