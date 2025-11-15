@@ -9,7 +9,7 @@ public class Pole : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col) {
 
-        Debug.Log(col.gameObject);
+        RealignIncomingBrick(col.gameObject);
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -19,7 +19,8 @@ public class Pole : MonoBehaviour
         
         foreach(Transform brick in gameObject.transform) {
             bricks.Add(brick.gameObject);
-            Debug.Log(bricks.Last());
+            RealignIncomingBrick(brick.gameObject);
+//            Debug.Log(bricks.Last());
         }
     }
 
@@ -27,5 +28,13 @@ public class Pole : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void RealignIncomingBrick(GameObject brick) {
+        Vector3 brickPosition = brick.transform.position;
+        Vector3 polePosition = transform.position;
+
+        brick.transform.position = new Vector3(polePosition.x, brickPosition.y, brickPosition.z);
+
     }
 }
