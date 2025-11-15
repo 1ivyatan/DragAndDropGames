@@ -26,14 +26,19 @@ public class Pole : MonoBehaviour
 
         bricks = addedBricks.OrderBy(g => g.transform.GetComponent<Draggable>().order).ToList();
 
+        int j = 0;
         for (int i = bricks.Count - 1; i >= 0; i--) {
+            Debug.Log(bricks[i].transform.GetComponent<Draggable>().order);
+
             bricks[i].transform.position = new Vector3(
                 transform.position.x,
                 transform.position.y - (GetComponent<RectTransform>().rect.height / 2) + 45 +  (
-                    bricks[i].transform.GetComponent<Draggable>().order * 90
+                    bricks[j].transform.GetComponent<Draggable>().order * 90
                 ),
                 bricks[i].transform.position.z
             );
+
+            j++;
         }
     }
 
