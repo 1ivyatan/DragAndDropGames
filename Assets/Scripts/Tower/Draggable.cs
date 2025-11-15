@@ -11,24 +11,32 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     private Camera camera;
     private Vector3 dragOffsetWorld;
     private Rigidbody2D rb;
+    private bool dragged = false;
     
     public void OnBeginDrag(PointerEventData eventData) {
+        if (Tracker.activeBrick && Tracker.activeBrick != this.gameObject) return;
+        else Tracker.activeBrick = this.gameObject;
+
+        dragged = true;
         rb.bodyType = RigidbodyType2D.Static;
 
+        Debug.Log("Brick picked up");
     }
 
     public void OnDrag(PointerEventData eventData) {
+        if (Tracker.activeBrick && Tracker.activeBrick != this.gameObject) return;
         transform.position = eventData.position;
     }
 
     public void OnEndDrag(PointerEventData eventData) {
         rb.bodyType = RigidbodyType2D.Dynamic;
-
+        rb.linearVelocity = new Vector2(0f, .1f);
+        dragged = false;
     }
 
     void OnTriggerEnter2D(Collider2D col) {
-        Debug.Log(col);
-        Debug.Log("Brick touches something");
+//        Debug.Log(col);
+  //      Debug.Log("Brick touches something");
     }
 
     void Awake()
@@ -46,9 +54,13 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         Debug.Log(oldPole.GetComponent<RectTransform>().rect.height / 2);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (Tracker.activeBrick && Tracker.activeBrick == this.gameObject && !dragged) {
+
+            if (rb.linearVelocity.magnitude > 0.01) return;
+            Tracker.activeBrick = null;
+            Debug.Log("Brick finally dropped, others can be picked up");
+        }
     }
 }
