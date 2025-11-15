@@ -33,8 +33,11 @@ public class Pole : MonoBehaviour
     void RealignIncomingBrick(GameObject brick) {
         Vector3 brickPosition = brick.transform.position;
         Vector3 polePosition = transform.position;
+        GameObject oldPole = brick.transform.GetComponent<Draggable>().oldPole;
 
+        brick.transform.SetParent(this.gameObject.transform);
         brick.transform.GetComponent<Draggable>().oldPole = this.gameObject;
+
         brick.transform.position = new Vector3(polePosition.x, brickPosition.y, brickPosition.z);
 
     }
