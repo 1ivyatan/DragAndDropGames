@@ -3,40 +3,31 @@ using UnityEngine.EventSystems;
 
 public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
+    public int order;
+    
     private Camera camera;
     private Vector3 dragOffsetWorld;
+    private Rigidbody2D rb;
     
     public void OnBeginDrag(PointerEventData eventData) {
-        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+        rb.bodyType = RigidbodyType2D.Static;
 
     }
 
     public void OnDrag(PointerEventData eventData) {
         transform.position = eventData.position;
-//        transform.position = Vector3.zero;
     }
 
     public void OnEndDrag(PointerEventData eventData) {
-        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+        rb.bodyType = RigidbodyType2D.Dynamic;
 
     }
-/*
-    private bool ScreenPointToWorld(Vector2 screenPoint, out Vector3 worldPoint) {
-        worldPoint = Vector3.zero;
-        
-        if (camera == null) {
-            return false;
-        }
-
-        float z = Mathf.Abs(camera.transform.position.z - transform.position.z);
-        Vector3 sp = new Vector3(screenPoint.x, screenPoint.y, z);
-        worldPoint = camera.ScreenToWorldPoint(sp);
-        
-        return true;
-    }*/
 
     void Awake()
     {
+        rb = GetComponent<Rigidbody2D>();
+
+        rb.mass = 10 + (10 * order);
        // camera = GetComponentInParent<Canvas>().worldCamera;
 
       //  Debug.Log(camera);
