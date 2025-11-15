@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -14,6 +15,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     private bool dragged = false;
     
     public void OnBeginDrag(PointerEventData eventData) {
+        if (oldPole.GetComponent<Pole>().bricks.Last() != gameObject) return;
         if (Tracker.activeBrick && Tracker.activeBrick != this.gameObject) return;
         else Tracker.activeBrick = this.gameObject;
 
@@ -24,6 +26,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     }
 
     public void OnDrag(PointerEventData eventData) {
+        if (oldPole.GetComponent<Pole>().bricks.Last() != gameObject) return;
         if (Tracker.activeBrick && Tracker.activeBrick != this.gameObject) return;
         transform.position = eventData.position;
     }
