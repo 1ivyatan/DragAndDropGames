@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Pole : MonoBehaviour
 {
-    private List<GameObject> bricks;
+    public List<GameObject> bricks;
 
     void OnTriggerEnter2D(Collider2D col) {
 
@@ -33,11 +33,19 @@ public class Pole : MonoBehaviour
     void RealignIncomingBrick(GameObject brick) {
         Vector3 brickPosition = brick.transform.position;
         Vector3 polePosition = transform.position;
-        GameObject oldPole = brick.transform.GetComponent<Draggable>().oldPole;
+
 
         brick.transform.SetParent(this.gameObject.transform);
-        brick.transform.GetComponent<Draggable>().oldPole = this.gameObject;
 
+        GameObject oldPole = brick.transform.GetComponent<Draggable>().oldPole;
+        if (!oldPole) {
+            oldPole = this.gameObject;
+        }
+
+        oldPole.GetComponent<Pole>().bricks.Remove(brick);
+        bricks.Add(brick);
+
+        brick.transform.GetComponent<Draggable>().oldPole = this.gameObject;
         brick.transform.position = new Vector3(polePosition.x, brickPosition.y, brickPosition.z);
 
     }
