@@ -26,14 +26,24 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
     }
 
+    void OnTriggerEnter2D(Collider2D col) {
+        Debug.Log(col);
+        Debug.Log("Brick touches something");
+    }
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-
         rb.mass = 10 + (10 * order);
-       // camera = GetComponentInParent<Canvas>().worldCamera;
+    }
 
-      //  Debug.Log(camera);
+    public void GetBack() {
+        transform.position = new Vector3(
+            oldPole.transform.position.x, 
+            oldPole.transform.position.y + (oldPole.GetComponent<RectTransform>().rect.height / 2), 
+            transform.position.z
+        );
+        Debug.Log(oldPole.GetComponent<RectTransform>().rect.height / 2);
     }
 
     // Update is called once per frame

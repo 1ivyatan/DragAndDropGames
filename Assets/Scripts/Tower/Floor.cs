@@ -2,6 +2,11 @@ using UnityEngine;
 
 public class Floor : MonoBehaviour
 {
+    void OnTriggerEnter2D(Collider2D col) {
+        // Brick touched something out of bounds
+        col.gameObject.GetComponent<Draggable>().GetBack();
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
