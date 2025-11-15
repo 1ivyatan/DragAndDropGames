@@ -5,6 +5,9 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 {
     public int order;
     
+    [HideInInspector]
+    public GameObject oldPole;
+    
     private Camera camera;
     private Vector3 dragOffsetWorld;
     private Rigidbody2D rb;

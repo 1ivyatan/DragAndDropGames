@@ -34,6 +34,7 @@ public class Pole : MonoBehaviour
         Vector3 brickPosition = brick.transform.position;
         Vector3 polePosition = transform.position;
 
+        brick.transform.GetComponent<Draggable>().oldPole = this.gameObject;
         brick.transform.position = new Vector3(polePosition.x, brickPosition.y, brickPosition.z);
 
     }
