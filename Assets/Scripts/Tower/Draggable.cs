@@ -21,8 +21,6 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
         dragged = true;
         rb.bodyType = RigidbodyType2D.Static;
-
-        Debug.Log("Brick picked up");
     }
 
     public void OnDrag(PointerEventData eventData) {
@@ -63,7 +61,6 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
             if (rb.linearVelocity.magnitude > 0.01) return;
             Tracker.activeBrick = null;
-            Debug.Log("Brick finally dropped, others can be picked up");
         }
     }
 }

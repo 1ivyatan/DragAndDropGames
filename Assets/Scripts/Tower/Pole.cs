@@ -8,10 +8,20 @@ public class Pole : MonoBehaviour
     public List<GameObject> bricks;
 
     private GameObject pole;
+    private int readyCount;
 
     void OnTriggerEnter2D(Collider2D col) {
 
-        RealignIncomingBrick(col.gameObject);
+        if (readyCount > 0) { // all bricks havent fallen yet
+            RealignIncomingBrick(col.gameObject);
+        } else {
+            if (bricks.Count > 0 && bricks.Last().GetComponent<Draggable>().order < col.gameObject.transform.GetComponent<Draggable>().order) {
+                col.gameObject.GetComponent<Draggable>().GetBack();
+                return;
+            }
+
+            RealignIncomingBrick(col.gameObject);
+        }
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -25,10 +35,11 @@ public class Pole : MonoBehaviour
         }
 
         bricks = addedBricks.OrderBy(g => g.transform.GetComponent<Draggable>().order).ToList();
+        readyCount = bricks.Count;
 
         int j = 0;
         for (int i = bricks.Count - 1; i >= 0; i--) {
-            Debug.Log(bricks[i].transform.GetComponent<Draggable>().order);
+          //  Debug.Log(bricks[i].transform.GetComponent<Draggable>().order);
 
             bricks[i].transform.position = new Vector3(
                 transform.position.x,
@@ -38,8 +49,18 @@ public class Pole : MonoBehaviour
                 bricks[i].transform.position.z
             );
 
+            bricks[i].GetComponent<Rigidbody2D>().linearVelocity = new Vector2(0f, .0001f);
+            StartCoroutine(WaitForBrickVelocityDrop(bricks[i]));
+
             j++;
         }
+        
+    }
+
+    IEnumerator WaitForBrickVelocityDrop(GameObject brick) {
+        yield return new WaitUntil(() => brick.GetComponent<Rigidbody2D>().linearVelocity.magnitude < 0.01);
+   
+        readyCount--;
     }
 
     // Update is called once per frame
