@@ -53,6 +53,10 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
             oldPole.transform.position.y + (oldPole.GetComponent<RectTransform>().rect.height / 2), 
             transform.position.z
         );
+        rb.linearVelocity = new Vector2(0f, .1f);
+
+        Object.FindFirstObjectByType<Sounds>().playAudio(0);
+
         Debug.Log(oldPole.GetComponent<RectTransform>().rect.height / 2);
     }
 
@@ -60,7 +64,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     {
         if (Tracker.activeBrick && Tracker.activeBrick == this.gameObject && !dragged) {
             if (rb.linearVelocity.magnitude > 0.01) return;
-            Object.FindFirstObjectByType<Sounds>().playAudio(0);
+            Object.FindFirstObjectByType<Sounds>().playAudio(1);
             rb.bodyType = RigidbodyType2D.Kinematic;
             Tracker.activeBrick = null;
         }

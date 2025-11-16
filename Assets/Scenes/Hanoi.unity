@@ -269,6 +269,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sfx:
   - {fileID: 8300000, guid: 4e8eb78e1a0d9024584025025197a3db, type: 3}
+  - {fileID: 8300000, guid: 9c044b565f8435747871f307abe34a37, type: 3}
   source: {fileID: 297412476}
 --- !u!1 &297412475
 GameObject:
@@ -299,14 +300,14 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 49
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
