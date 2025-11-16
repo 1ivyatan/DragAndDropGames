@@ -62,6 +62,7 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         if (Tracker.activeBrick && Tracker.activeBrick == this.gameObject && !dragged) {
 
             if (rb.linearVelocity.magnitude > 0.01) return;
+            rb.bodyType = RigidbodyType2D.Kinematic;
             Tracker.activeBrick = null;
         }
     }
