@@ -12,6 +12,7 @@ public class Tracker : MonoBehaviour
     public static bool locked = false;
 
     public GameObject winningPole;
+    public GameObject winOverlay;
 
     public void InspectVictory() {
         if (winningPole.transform.childCount == bricks.Count) {
@@ -24,6 +25,7 @@ public class Tracker : MonoBehaviour
     IEnumerator SpawnWinScreen(GameObject brick) {
         yield return new WaitUntil(() => brick.GetComponent<Rigidbody2D>().linearVelocity.magnitude < 0.0001);
    
+        winOverlay.SetActive(true);
         Debug.Log("win");
     }
 
