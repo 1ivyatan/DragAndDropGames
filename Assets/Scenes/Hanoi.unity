@@ -216,6 +216,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41f526052e6555dc6bd5d6a032f95d4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bricks:
+  - {fileID: 1571558072}
+  - {fileID: 1388811073}
+  winningPole: {fileID: 1001917271}
 --- !u!4 &289502005
 Transform:
   m_ObjectHideFlags: 0
@@ -494,6 +498,11 @@ PrefabInstance:
 --- !u!224 &606265031 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5726279689668892908, guid: ce036f84d78d9070c8d0ddcca2535483, type: 3}
+  m_PrefabInstance: {fileID: 606265030}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1001917271 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5500149810656759928, guid: ce036f84d78d9070c8d0ddcca2535483, type: 3}
   m_PrefabInstance: {fileID: 606265030}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1007433599

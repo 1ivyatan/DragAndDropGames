@@ -21,6 +21,8 @@ public class Pole : MonoBehaviour
             }
 
             DropIncomingBrick(col.gameObject);
+
+            Object.FindFirstObjectByType<Tracker>().InspectVictory();
         }
     }
 
