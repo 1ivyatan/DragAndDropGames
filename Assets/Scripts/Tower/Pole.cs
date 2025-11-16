@@ -20,7 +20,7 @@ public class Pole : MonoBehaviour
                 return;
             }
 
-            RealignIncomingBrick(col.gameObject);
+            DropIncomingBrick(col.gameObject);
         }
     }
 
@@ -34,7 +34,7 @@ public class Pole : MonoBehaviour
             addedBricks.Add(brick.gameObject);
         }
 
-        bricks = addedBricks.OrderBy(g => g.transform.GetComponent<Draggable>().order).ToList();
+        bricks = addedBricks.OrderByDescending(g => g.GetComponent<Draggable>().order).ToList();
         readyCount = bricks.Count;
 
         int j = 0;
@@ -69,7 +69,7 @@ public class Pole : MonoBehaviour
         
     }
 
-    void RealignIncomingBrick(GameObject brick) {
+    void DropIncomingBrick(GameObject brick) {
         Vector3 brickPosition = brick.transform.position;
         Vector3 polePosition = transform.position;
 
@@ -83,6 +83,20 @@ public class Pole : MonoBehaviour
 
         oldPole.GetComponent<Pole>().bricks.Remove(brick);
         bricks.Add(brick);
+
+        brick.transform.GetComponent<Draggable>().oldPole = pole;
+        brick.transform.position = new Vector3(polePosition.x, brickPosition.y, brickPosition.z);
+
+    }
+
+    void RealignIncomingBrick(GameObject brick) {
+        Vector3 brickPosition = brick.transform.position;
+        Vector3 polePosition = transform.position;
+
+        GameObject oldPole = brick.transform.GetComponent<Draggable>().oldPole;
+        if (!oldPole) {
+            oldPole = pole;
+        }
 
         brick.transform.GetComponent<Draggable>().oldPole = pole;
         brick.transform.position = new Vector3(polePosition.x, brickPosition.y, brickPosition.z);
