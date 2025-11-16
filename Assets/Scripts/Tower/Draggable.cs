@@ -59,8 +59,8 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     void Update()
     {
         if (Tracker.activeBrick && Tracker.activeBrick == this.gameObject && !dragged) {
-
             if (rb.linearVelocity.magnitude > 0.01) return;
+            Object.FindFirstObjectByType<Sounds>().playAudio(0);
             rb.bodyType = RigidbodyType2D.Kinematic;
             Tracker.activeBrick = null;
         }
