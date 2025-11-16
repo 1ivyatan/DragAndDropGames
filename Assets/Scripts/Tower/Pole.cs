@@ -17,12 +17,10 @@ public class Pole : MonoBehaviour
         } else {
             if (bricks.Count > 0 && bricks.Last().GetComponent<Draggable>().order < col.gameObject.transform.GetComponent<Draggable>().order) {
                 col.gameObject.GetComponent<Draggable>().GetBack();
-                return;
+            } else {
+                DropIncomingBrick(col.gameObject);
+                Object.FindFirstObjectByType<Tracker>().InspectVictory();
             }
-
-            DropIncomingBrick(col.gameObject);
-
-            Object.FindFirstObjectByType<Tracker>().InspectVictory();
         }
     }
 
@@ -92,13 +90,14 @@ public class Pole : MonoBehaviour
     }
 
     void RealignIncomingBrick(GameObject brick) {
-        Vector3 brickPosition = brick.transform.position;
-        Vector3 polePosition = transform.position;
-
         GameObject oldPole = brick.transform.GetComponent<Draggable>().oldPole;
         if (!oldPole) {
             oldPole = pole;
         }
+
+        Vector3 brickPosition = brick.transform.position;
+        Vector3 polePosition = transform.position;
+
 
         brick.transform.GetComponent<Draggable>().oldPole = pole;
         brick.transform.position = new Vector3(polePosition.x, brickPosition.y, brickPosition.z);

@@ -9,7 +9,6 @@ public class Draggable : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     [HideInInspector]
     public GameObject oldPole;
     
-    private Camera camera;
     private Vector3 dragOffsetWorld;
     private Rigidbody2D rb;
     private bool dragged = false;

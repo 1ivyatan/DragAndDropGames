@@ -35,6 +35,7 @@ public class Tracker : MonoBehaviour
 
         if (winningPole.transform.childCount == bricks.Count) {
             locked = true;
+            menuOverlay.SetActive(false);
             StartCoroutine(SpawnWinScreen(activeBrick));
         }
         
@@ -44,10 +45,18 @@ public class Tracker : MonoBehaviour
         yield return new WaitUntil(() => brick.GetComponent<Rigidbody2D>().linearVelocity.magnitude < 0.0001);
    
         TimeSpan time = TimeSpan.FromSeconds((int)timeTicked);
-        winOverlay.transform.Find("Panel/FillText").GetComponent<Text>().text = time.ToString(@"hh\:mm\:ss");
+        winOverlay.transform.Find("Panel/FillText").GetComponent<Text>().text = time.ToString(@"hh\:mm\:ss") + "\n" + moveCount + " / " + minMoveCount;
+
+        int seconds = (int)TimeSpan.FromSeconds((int)timeTicked).TotalSeconds;
+        if (seconds <= 120 && moveCount == minMoveCount) {
+            winOverlay.transform.Find("Panel/StarsText").GetComponent<Text>().text = "★★★";
+        } else if (seconds <= 300 && moveCount < minMoveCount * 2) {
+            winOverlay.transform.Find("Panel/StarsText").GetComponent<Text>().text = "★★";
+        } else {
+            winOverlay.transform.Find("Panel/StarsText").GetComponent<Text>().text = "★";
+        }
 
         winOverlay.SetActive(true);
-        menuOverlay.SetActive(false);
         Debug.Log("win");
     }
 
