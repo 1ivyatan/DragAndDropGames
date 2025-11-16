@@ -19,6 +19,8 @@ public class Tracker : MonoBehaviour
     public GameObject winningPole;
     public GameObject winOverlay;
     public GameObject menuOverlay;
+    public GameObject bgm;
+
 
     public GameObject tickerText;
     public GameObject movesText;
@@ -35,7 +37,10 @@ public class Tracker : MonoBehaviour
 
         if (winningPole.transform.childCount == bricks.Count) {
             locked = true;
+
             menuOverlay.SetActive(false);
+            bgm.GetComponent<AudioSource>().clip = UnityEngine.Object.FindFirstObjectByType<Sounds>().sfx[2];
+            bgm.GetComponent<AudioSource>().Play();
             StartCoroutine(SpawnWinScreen(activeBrick));
         }
         
